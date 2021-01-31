@@ -32,3 +32,34 @@ def laserattack(self,dt):
                 self._beamtime += dt
             else:
                 self._beamtime += dt
+         
+        
+-----------------------------------------------------------------------------------------   
+=========================================================================================
+-----------------------------------------------------------------------------------------                
+                
+                
+def update(self,laser):
+        """
+        Update method for the boss to animate its laser firing animation.
+
+        Parameter laser: determines whether to animate or not.
+        Precondition: laser is a bool
+        """
+        if laser == True:
+            if self.frame == 0:
+                self._frames = self.lasercharge()
+                self.frame = self._frames[self._count%16]
+                self._count += 1
+            elif self.frame <= 14 and self._count < 16:
+                if self._frames != None:
+                    self.frame = self._frames[self._count%16]
+                    self._count += 1
+                    if self._count >= 16:
+                        self.frame = 15
+                        self._frames = self.laserhold()
+                        self._count = 0
+            elif self.frame > 14:
+                if self._frames != None:
+                    self._count += 1
+                    self.frame = self._frames[self._count%4]                
